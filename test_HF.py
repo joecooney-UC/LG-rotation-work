@@ -9,7 +9,7 @@ for the gagliardi group rotation
 
 import pyscf
 import numpy as np
-import scipy
+import scipy.linalg
 
 # define molecule
 
@@ -158,7 +158,7 @@ def generalized_eigval(fock, s):
     mo_coeff
     '''
     
-    mo_energy, mo_coeff = scipy.linalg.eigh(fock, s)
+    mo_energy, mo_coeff = linalg.eigh(fock, s)
     return mo_energy, mo_coeff
 
 def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
