@@ -166,6 +166,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
     s = mol.intor_symmetric('int1e_ovlp')
     
     # init guess
+    h1 = get_hcore(mol)
     mo_coeff = np.zeros_like(h1)
     dm = construct_dm(mol, mo_coeff)
     
