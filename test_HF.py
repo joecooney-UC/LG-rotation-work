@@ -26,21 +26,6 @@ mol.charge=0
 mol.basis='CC-PVDZ'
 mol.build()
 
-# run the code
-energy = scf_procedure(mol)[0]
-
-#use as initial guess:
-h1 = get_hcore(mol)
-mo_coeff = np.zeroes_like(h1) #dimension (nbasis * nbasis)
-dm = construct_dm(mol, mo_coeff)
-
-# run pyscf code for reference energy
-mf = pyscf.scf.RHF(mol)
-refenergy = mf.kernel()
-
-# test:
-if np.allclose():
-    print("it worked")
 
 def get_hcore(mol):
     '''
@@ -204,4 +189,20 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
         print("hasnt converged")
         
     return energy, mo_coeff
+
+# run the code
+energy = scf_procedure(mol)[0]
+
+#use as initial guess:
+h1 = get_hcore(mol)
+mo_coeff = np.zeroes_like(h1) #dimension (nbasis * nbasis)
+dm = construct_dm(mol, mo_coeff)
+
+# run pyscf code for reference energy
+mf = pyscf.scf.RHF(mol)
+refenergy = mf.kernel()
+
+# test:
+if np.allclose():
+    print("it worked")
 
