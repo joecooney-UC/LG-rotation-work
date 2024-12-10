@@ -215,7 +215,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
     s = mol.intor_symmetric('int1e_ovlp')
     
     # init guess
-    mo_coeff = np.zeroes_like(h1)
+    mo_coeff = np.zeros_like(h1)
     nocc_up, nocc_down = mol.nelec()
 
     mo_up_coeff = mo_coeff[:, :nocc_up]
@@ -276,7 +276,7 @@ if np.allclose():
 
 #use as initial guess:
 h1 = get_hcore(mol)
-mo_coeff = np.zeroes_like(h1) #dimension (nbasis * nbasis_up)
+mo_coeff = np.zeros_like(h1) #dimension (nbasis * nbasis_up)
 
 mo_up_coeff = mo_coeff[:, :nocc_up]
 mo_down_coeff = mo_coeff[:, :nocc_down]
