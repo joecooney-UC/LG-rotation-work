@@ -244,7 +244,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
 
 #use as initial guess:
 h1 = get_hcore(mol)
-mo_coeff = np.zeroes_like(h1) #dimension (nbasis * nbasis)
+mo_coeff = np.zeros_like(h1) #dimension (nbasis * nbasis)
 dm = construct_dm(mol, mo_coeff)
 
 # DIIS initial guesses
