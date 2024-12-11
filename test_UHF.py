@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 """
 Created on Tue Nov 12 13:03:42 2024
 
@@ -15,10 +9,6 @@ for the gagliardi group rotation
 import pyscf
 import numpy
 import scipy
-
-
-# In[2]:
-
 
 # define molecule
 # same as RHF - will have 5 doubly occupied orbitals (5 up, 5 down electrons)
@@ -36,10 +26,6 @@ mol.charge=0
 mol.basis='CC-PVDZ'
 mol.build()
 
-
-# In[16]:
-
-
 # this not the same - need to include spin of orbitals and do separately
 def get_hcore(mol):
     '''
@@ -56,11 +42,6 @@ def get_hcore(mol):
     hcore = t + v
     return hcore
     
-
-
-# In[17]:
-
-
 # same as RHF
 def get_eri(mol):
     '''
@@ -74,10 +55,6 @@ def get_eri(mol):
     '''
     eri = mol.intor('int2e')
     return eri
-
-
-# In[7]:
-
 
 # same but do it for both dm's 
 def get_veff(mol, dm):
@@ -96,10 +73,6 @@ def get_veff(mol, dm):
     K = np.einsum('pqrs, rq->ps', eri, dm)
     return J - 0.5*K
 
-
-# In[8]:
-
-
 # same but do it for both dm's
 def construct_fock(mol, dm):
     '''
@@ -117,10 +90,6 @@ def construct_fock(mol, dm):
     veff = get_veff(mol, dm)
     fock = hcore + veff
     return fock
-
-
-# In[14]:
-
 
 # use this for each one.
 def construct_dm(mol, mo_coeff, up_or_dn):
@@ -145,10 +114,6 @@ def construct_dm(mol, mo_coeff, up_or_dn):
         dm_down = 2. * np.dot(mo_coeff[:, :nocc_down], mo_coeff[:, :nocc].T)
         return dm_down
 
-
-# In[10]:
-
-
 # do for both dm's
 def get_energy(mol, dm):
     '''
@@ -170,10 +135,6 @@ def get_energy(mol, dm):
             
     return energy
 
-
-# In[11]:
-
-
 # do for both dm's
 def generalized_eigval(fock, s):
     '''
@@ -190,9 +151,6 @@ def generalized_eigval(fock, s):
     
     mo_energy, mo_coeff = scipy.linalg.eigh(fock, s)
     return mo_energy, mo_coeff
-
-
-# In[2]:
 
 
 def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
@@ -258,10 +216,6 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
         print("hasnt converged")
         
     return energy, mo_coeff
-
-
-# In[ ]:
-
 
 # run the code
 # remain mostly the same as RHF - change the methods and need 2 density matrices
