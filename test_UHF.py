@@ -106,13 +106,14 @@ def construct_dm(mol, mo_coeff, up_or_dn):
     
     nocc_up = mol.nelec[0]
     nocc_down = mol.nelec[1]
+    nocc = nocc_up + nocc_down
     
     if up_or_dn == "up":
-        dm_up = 2. * np.dot(mo_coeff[:, :nocc_up], mo_coeff[:, :nocc].T)
+        dm_up = 2. * np.dot(mo_coeff[:, :nocc_up], mo_coeff[:, :nocc_up].T)
         return dm_up
     
     else:
-        dm_down = 2. * np.dot(mo_coeff[:, :nocc_down], mo_coeff[:, :nocc].T)
+        dm_down = 2. * np.dot(mo_coeff[:, :nocc_down], mo_coeff[:, :nocc_down].T)
         return dm_down
 
 # do for both dm's
