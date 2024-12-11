@@ -9,7 +9,7 @@ for the gagliardi group rotation
 
 import pyscf
 import numpy as np
-import scipy.linalg
+import scipy.linalg as linalg
 
 # define molecule
 
