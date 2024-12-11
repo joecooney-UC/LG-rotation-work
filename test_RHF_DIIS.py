@@ -187,7 +187,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
         fock = construct_fock(mol, dm)
 
         # build residuals
-        diis_r = a.dot((fock.dot(dm).dot(s) - s.dot(dm).dot(fock))).dot(a)
+        diis_r = a.dot(fock.dot(dm).dot(s) - s.dot(dm).dot(fock)).dot(a)
 
         # append to lists
         fock_List.append(fock)
@@ -202,9 +202,9 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
 
         # check convergence
         if np.abs(energy - new_energy) < ethresh and dRMS < dmthresh:
-         print('converged')
-         converge = True
-         break
+            print('converged')
+            converge = True
+            break
 
         if len(fock_List) > 1:
             # Build the B matrix
@@ -214,8 +214,8 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
             B[:, -1] = -1
             B[-1, -1] = 0
             for i in range(len(fock_List)):
-             for j in range(len(fock_List)):
-              B[i, j] = np.einsum('ij,ij->', DIIS_Resid[i], DIIS_Resid[j], optimize=True)
+                for j in range(len(fock_List)):
+                    B[i, j] = np.einsum('ij,ij->', DIIS_Resid[i], DIIS_Resid[j], optimize=True)
 
             # Build RHS of Pulay equation
             rhs = np.zeros((B_dim))
@@ -240,7 +240,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
         energy = new_energy
         
     if not converge:
-     print("hasnt converged")
+        print("hasnt converged")
 
     return energy, mo_coeff
 
