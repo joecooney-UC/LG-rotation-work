@@ -21,7 +21,7 @@ H          0.00000     0.75545    -0.47116
 H          0.00000    -0.75545    -0.47116
 '''
 
-mo.spin=0
+mol.spin=0
 mol.charge=0
 mol.basis='CC-PVDZ'
 mol.build()
