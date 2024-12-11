@@ -184,8 +184,8 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
             converge=True
             break
         
-    dm = new_dm
-    energy = new_energy
+        dm = new_dm
+        energy = new_energy
     if not converge:
         print("hasnt converged")
         
