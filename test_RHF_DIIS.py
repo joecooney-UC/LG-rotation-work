@@ -176,7 +176,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
 
     # Trial and residual vector lists
     fock_List = []
-    DIIS_Resid = []
+    diis_Resid = []
 
     # SCF procedure
     converge = False
@@ -191,7 +191,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
 
         # append to lists
         fock_List.append(fock)
-        DIIS_Resid.append(diis_r)
+        diis_Resid.append(diis_r)
 
         # compute energy
         mo_energy, mo_coeff = generalized_eigval(fock, s)
@@ -206,7 +206,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
             converge = True
             break
 
-        if len(fock_List) > 1:
+        if i > 2:
             # Build the B matrix
             B_dim = len(fock_List) + 1
             B = np.empty((B_dim, B_dim))
@@ -215,7 +215,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
             B[-1, -1] = 0
             for i in range(len(fock_List)):
                 for j in range(len(fock_List)):
-                    B[i, j] = np.einsum('ij,ij->', DIIS_Resid[i], DIIS_Resid[j], optimize=True)
+                    B[i, j] = np.einsum('ij,ij->', diis_Resid[i], diis_Resid[j], optimize=True)
 
             # Build RHS of Pulay equation
             rhs = np.zeros((B_dim))
