@@ -165,8 +165,8 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
 
     # get overlap matrix
     s = mol.intor_symmetric('int1e_ovlp')
-    # i removed the threshold from this! it may blow up.
-    a = np.power(s, -0.5)
+    # threshhold because some of these are zero.
+    a = np.power(s, -0.5, where=s>1.e-16)
 
     # init guess
     fock_p = a.dot(get_hcore(mol)).dot(a)
