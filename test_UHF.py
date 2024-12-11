@@ -175,7 +175,8 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
     # init guess
     h1 = get_hcore(mol)
     mo_coeff = np.zeros_like(h1)
-    nocc_up, nocc_down = mol.nelec()
+    nocc_up = mol.nelec[0]
+    nocc_down = mol.nelec[1]
 
     mo_up_coeff = mo_coeff[:, :nocc_up]
     mo_down_coeff = mo_coeff[:, :nocc_down]
