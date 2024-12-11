@@ -7,7 +7,7 @@ for the gagliardi group rotation
 """
 
 import pyscf
-import numpy
+import numpy as np
 import scipy
 
 # define molecule
