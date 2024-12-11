@@ -104,7 +104,8 @@ def construct_dm(mol, mo_coeff, up_or_dn):
     dm: density matrix
     '''
     
-    nocc_up, nocc_down = mol.nelec()
+    nocc_up = mol.nelec[0]
+    nocc_down = mol.nelec[1]
     
     if up_or_dn == "up":
         dm_up = 2. * np.dot(mo_coeff[:, :nocc_up], mo_coeff[:, :nocc].T)
