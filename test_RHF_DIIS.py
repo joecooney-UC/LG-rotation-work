@@ -213,9 +213,9 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
             B[-1, :] = -1
             B[:, -1] = -1
             B[-1, -1] = 0
-            for i in range(len(fock_List)):
-                for j in range(len(fock_List)):
-                    B[i, j] = np.einsum('ij,ij->', diis_Resid[i], diis_Resid[j], optimize=True)
+            for j in range(len(fock_List)):
+                for k in range(len(fock_List)):
+                    B[j, k] = np.einsum('jk,jk->', diis_Resid[j], diis_Resid[k], optimize=True)
 
             # Build RHS of Pulay equation
             rhs = np.zeros((B_dim))
