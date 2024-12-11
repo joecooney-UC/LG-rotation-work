@@ -68,7 +68,7 @@ def get_veff(mol, dm):
     -------
     J-0.5*K
     '''
-    eri = get_eri(mole)
+    eri = get_eri(mol)
     J = np.einsum('pqrs, qp->rs', eri, dm)
     K = np.einsum('pqrs, rq->ps', eri, dm)
     return J - 0.5*K
