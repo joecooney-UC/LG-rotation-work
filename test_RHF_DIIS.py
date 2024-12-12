@@ -212,6 +212,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
             # Build the B matrix
             B_dim = len(fock_List) + 1
             B = np.empty((B_dim, B_dim))
+            print((B_dim, B_dim))
             B[-1, :] = -1
             B[:, -1] = -1
             B[-1, -1] = 0
