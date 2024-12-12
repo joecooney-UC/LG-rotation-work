@@ -146,7 +146,7 @@ def generalized_eigval(fock, s):
     mo_energy, mo_coeff = linalg.eigh(fock, s)
     return mo_energy, mo_coeff
 
-def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
+def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=10):
     '''
     Parameters
     ----------
