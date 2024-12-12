@@ -171,7 +171,8 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
     # init guess
     h1 = get_hcore(mol)
     fock_p = a.dot(h1).dot(a)
-    mo_energy, mo_coeff_p = generalized_eigval(fock_p, s)
+    # mo_energy, mo_coeff_p = generalized_eigval(fock_p, s)
+    mo_coeff_p = np.zeros_like(h1)
     mo_coeff = a.dot(mo_coeff_p)
     dm = construct_dm(mol, mo_coeff)
 
