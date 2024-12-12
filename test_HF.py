@@ -163,10 +163,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=10):
     '''
     
     # get overlap matrix
-    s = mol.intor_symmetric('int1e_ovlp')
-    a = np.power(s, -0.5, where=s>1.e-16)
-    print(a)
-    
+    s = mol.intor_symmetric('int1e_ovlp')    
     # init guess
     h1 = get_hcore(mol)
     mo_coeff = np.zeros_like(h1)
