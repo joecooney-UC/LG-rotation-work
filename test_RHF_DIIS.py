@@ -231,8 +231,6 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
             for x in range(coeff.shape[0] - 1):
                 fock += coeff[x] * fock_List[x]
 
-            print(fock)
-
         # Compute new orbital guess with DIIS Fock matrix
         fock_p = a.dot(fock).dot(a)
         mo_energy, mo_coeff_p = generalized_eigval(fock_p, s)
