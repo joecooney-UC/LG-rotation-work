@@ -168,8 +168,6 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=1):
     # threshhold because some of these are zero.
     # this is not the issue - it matches test_HF.py.
     a = np.power(s, -0.5, where=s>1.e-16)
-    print(a)
-
     # init guess
     h1 = get_hcore(mol)
     fock_p = a.dot(h1).dot(a)
