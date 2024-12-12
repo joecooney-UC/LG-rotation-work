@@ -147,7 +147,7 @@ def generalized_eigval(fock, s):
     return mo_energy, mo_coeff
 
 
-def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=1):
+def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
     '''
     Parameters
     ----------
