@@ -234,10 +234,14 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=10):
 
         # Compute new orbital guess with DIIS Fock matrix
         fock_p = a.dot(fock).dot(a)
+        print("new fock matrix:/n", fock_p)
         mo_energy, mo_coeff_p = generalized_eigval(fock_p, s)
         mo_coeff = a.dot(mo_coeff_p)
         new_dm = construct_dm(mol, mo_coeff)
         new_energy = get_energy(mol, new_dm)
+
+        print("dm was:/n", dm)
+        print("dm is:/n", new_dm)
 
         dm = new_dm
         energy = new_energy
