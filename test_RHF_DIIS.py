@@ -208,7 +208,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
             converge = True
             break
 
-        if i > 10:
+        if i > 1:
             # Build the B matrix
             B_dim = len(fock_List) + 1
             B = np.empty((B_dim, B_dim))
@@ -220,7 +220,7 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=5):
                     B[j, k] = np.einsum('jk,jk->', diis_Resid[j], diis_Resid[k], optimize=True)
 
             # Build RHS of Pulay equation
-            rhs = np.zeros((B_dim))
+            rhs = np.zeros(B_dim)
             rhs[-1] = -1
 
             # Solve Pulay equation for c_i's with NumPy
