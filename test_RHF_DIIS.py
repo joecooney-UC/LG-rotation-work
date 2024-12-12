@@ -147,7 +147,7 @@ def generalized_eigval(fock, s):
     return mo_energy, mo_coeff
 
 
-def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
+def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=10):
     '''
     Parameters
     ----------
@@ -167,9 +167,11 @@ def scf_procedure(mol, ethresh=1e-7, dmthresh=1e-7, maxiter=100):
     s = mol.intor_symmetric('int1e_ovlp')
     # threshhold because some of these are zero.
     a = np.power(s, -0.5, where=s>1.e-16)
+    print(a)
 
     # init guess
-    fock_p = a.dot(get_hcore(mol)).dot(a)
+    h1 = get_hcore(mol)
+    fock_p = a.dot(h1).dot(a)
     mo_energy, mo_coeff_p = generalized_eigval(fock_p, s)
     mo_coeff = a.dot(mo_coeff_p)
     dm = construct_dm(mol, mo_coeff)
